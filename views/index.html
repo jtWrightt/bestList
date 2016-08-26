@@ -13,12 +13,26 @@
     <h2>Add todo item <input type="text" class="todo-input" /><button class="add-todo-button">lets do it</button></h2>
     
     <ul class="todo-list"></ul>
+    <hr />
+    <h3>Man this todo app is rad, but you should add/change/fix/remove <input class="idea-text" type="text" placeholder="everything" /><button class="add-idea">lets do it</button></h3>
+    <ul class="idea-list"></ul>
+    
     
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous"></script>
     <script src="/client.js"></script>
     <script src="https://use.fontawesome.com/ee3e4d8007.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAPlx4VeT-tc3tRkMAkqecqLe7FvJSOT9s",
+    authDomain: "bestlist-dc067.firebaseapp.com",
+    databaseURL: "https://bestlist-dc067.firebaseio.com",
+    storageBucket: "bestlist-dc067.appspot.com",
+  };
+  firebase.initializeApp(config);
+</script>
   </body>
 </html>

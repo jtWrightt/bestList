@@ -10,7 +10,6 @@ Change Log
 ------------
 
 
-
 Made by JT Wright
 -----------------
 
