@@ -8,6 +8,12 @@ tl;dr todo app that goes the extra mile.
 
 Change Log
 ------------
+v0.0.3
++ Can now reorder todo items with font awesome icons
++ items can be reordered by moving one slot up/down
++ items can now be edited with a text input box
++ that box is reached by clicking the font awesome pencil
+
 v0.0.2
 + Just made the x's above the bullet, completly visual
 + added footer because random is everywhere

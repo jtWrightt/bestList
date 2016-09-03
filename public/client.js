@@ -39,7 +39,7 @@ function showList() {
   todoItems = [];
   var i = 0;
   while (localStorage.getItem(i) != null) {
-    $('.todo-list').append('<i class="fa fa-times" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> •<li class="todo-item"> '+ localStorage.getItem(i) +'</li><br>');
+    $('.todo-list').append('<i class="fa fa-times" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> •<li class="todo-item"> '+ localStorage.getItem(i) +' <i class="fa fa-chevron-up" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-chevron-down" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-pencil" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i><input class="edit" type="text" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" placeholder="Whats new?" /> <i class="fa fa-check" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i></li><br>');
     todoItems.push(localStorage.getItem(i));
     i++;
   }
@@ -161,3 +161,57 @@ function randomFA() {
 
   $(".footer").addClass(fontAwesome[random]);
 }
+
+/* function for changing the index of a specific todo item by -1
+  this moves the item up on the list, allowing for item reordering
+  checks if shiftUpInx != 0 so an undefined object wont be made
+  runs saveList to show list
+*/
+$('.todo-list').on('click', '.fa-chevron-up', function() {
+  var id = this.id;
+  var shiftUpInx = $.inArray(id,todoItems);
+  
+  if (shiftUpInx != 0) {
+    var shiftDownInx = shiftUpInx - 1;
+    var shiftDownText = todoItems[shiftDownInx];
+    todoItems[shiftDownInx] = id;
+    todoItems[shiftUpInx] = shiftDownText;
+    saveList();
+  }
+});
+
+/* function for changing the index of a specific todo item by +1
+  this moves the item down on the list, allowing for item reordering
+  checks if shiftUpInx != todoItems.length - 1 so an undefined object wont be made
+  runs saveList to show list
+*/
+$('.todo-list').on('click', '.fa-chevron-down', function() {
+  var id = this.id;
+  var shiftDownInx = $.inArray(id,todoItems);
+  
+  if (shiftDownInx != (todoItems.length - 1)) {
+    var shiftUpInx = shiftDownInx + 1;
+    var shiftUpText = todoItems[shiftUpInx];
+    todoItems[shiftUpInx] = id;
+    todoItems[shiftDownInx] = shiftUpText;
+    saveList();
+  }
+});
+
+/* function that sets up enviroment for a todo edit
+  shows and hides a few id specific list elements
+  all these items' ids have dashes instead of spaces
+*/
+$('.todo-list').on('click', '.fa-pencil', function() {
+  $("#" + this.id + ".fa-pencil" ).css('display', 'none');
+  $("#" + this.id + ".edit").css('display', 'initial');
+  $("#" + this.id + ".fa-check").css('display', 'initial');
+});
+
+$('.todo-list').on('click', '.fa-check', function() {
+  var newTodo = $("#" + this.id + ".edit").val();
+  var oldTodo = this.id.replace(/-/g, " ");
+  var oldTodoInx = $.inArray(oldTodo,todoItems);
+  todoItems[oldTodoInx] = newTodo;
+  saveList();
+});

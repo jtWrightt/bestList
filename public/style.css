@@ -64,3 +64,12 @@ b, .footer {
 hr {
   color: #7A9A95;
 }
+
+.todo-list .edit {
+  display:none;
+  padding: 3px;
+}
+
+.todo-list .fa-check {
+  display: none;
+}
