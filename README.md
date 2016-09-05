@@ -8,6 +8,11 @@ tl;dr todo app that goes the extra mile.
 
 Change Log
 ------------
+v0.0.4
++ Harambe is now apart of the background, but not the full so you can still read
++ added check box (first click check box then X shows up, so you can mark stuff without deleting it) NOT YET FINISHED
++ Added tooltips
+
 v0.0.3
 + Can now reorder todo items with font awesome icons
 + items can be reordered by moving one slot up/down
