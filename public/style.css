@@ -1,5 +1,8 @@
 body {
   background: #3F2860;
+  background-image: url("http://aldf.org/wp-content/uploads/2016/06/harambe.jpg");
+  background-position:right bottom;
+  background-repeat:no-repeat;
   color:white;
   font-family:'Roboto';
   font-size:17px;

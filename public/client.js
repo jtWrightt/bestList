@@ -39,18 +39,29 @@ function showList() {
   todoItems = [];
   var i = 0;
   while (localStorage.getItem(i) != null) {
-    $('.todo-list').append('<i class="fa fa-times" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> •<li class="todo-item"> '+ localStorage.getItem(i) +' <i class="fa fa-chevron-up" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-chevron-down" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-pencil" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i><input class="edit" type="text" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" placeholder="Whats new?" /> <i class="fa fa-check" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i></li><br>');
+    $('.todo-list').append('<i class="ph" id="' + localStorage.getItem(i).replace(/ /g, "-") + '"></i><input type="checkbox" class="check" title="Done!" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" aria-hidden="true" /> •<li class="todo-item"> '+ localStorage.getItem(i) +' <i class="fa fa-chevron-up" title="Move up" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-chevron-down" tile="Move down" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-pencil" title="Delete"id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i><input class="edit" type="text" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" placeholder="Whats new?" /> <i class="fa fa-check" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i></li><br>');
     todoItems.push(localStorage.getItem(i));
     i++;
   }
 }
 
+/* function that adds a check box to mark off items without deletion
+  after you check you can then delete
+  system somebody wanted
+  NOT YET FINISHED
+  */
+$('.todo-list').on('click', 'input', function() {
+  if($(".checked #" + this.id).prop('checked')) {
+    console.log("here");
+  }
+  $("#" + this.id).prepend('<i class="fa fa-times" id="'+this.id+'"></i>');
+});
+
  /* Function for deleting list items
  runs savelist after deletion of items from todoItems
  */
- 
 $('.todo-list').on('click', '.fa-times', function() {
-  var index = this.id;
+  var index = this.id.replace(/-/g, " ");
   todoItems = jQuery.grep(todoItems, function(value) {
   return value != index;
 });
