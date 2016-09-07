@@ -8,6 +8,10 @@ tl;dr todo app that goes the extra mile.
 
 Change Log
 ------------
+v0.0.5
++ checkbox now finished
++ checkbox locally stored so still there on page refresh
+
 v0.0.4
 + Harambe is now apart of the background, but not the full so you can still read
 + added check box (first click check box then X shows up, so you can mark stuff without deleting it) NOT YET FINISHED

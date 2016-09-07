@@ -39,7 +39,12 @@ function showList() {
   todoItems = [];
   var i = 0;
   while (localStorage.getItem(i) != null) {
-    $('.todo-list').append('<i class="ph" id="' + localStorage.getItem(i).replace(/ /g, "-") + '"></i><input type="checkbox" class="check" title="Done!" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" aria-hidden="true" /> •<li class="todo-item"> '+ localStorage.getItem(i) +' <i class="fa fa-chevron-up" title="Move up" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-chevron-down" tile="Move down" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-pencil" title="Delete"id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i><input class="edit" type="text" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" placeholder="Whats new?" /> <i class="fa fa-check" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i></li><br>');
+    x = checkIfChecked(localStorage.getItem(i));
+    if (x == 'checked') {
+      $('.todo-list').append('<i class="fa fa-times" id="' + localStorage.getItem(i).replace(/ /g, "-") + '"></i><i class="ph" id="' + localStorage.getItem(i).replace(/ /g, "-") + '"></i><input type="checkbox" '+x+' class="check" title="Done!" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" aria-hidden="true" /> •<li class="todo-item"> '+ localStorage.getItem(i) +' <i class="fa fa-chevron-up" title="Move up" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-chevron-down" tile="Move down" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-pencil" title="Delete"id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i><input class="edit" type="text" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" placeholder="Whats new?" /> <i class="fa fa-check" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i></li><br>');
+    } else {
+    $('.todo-list').append('<i class="ph" id="' + localStorage.getItem(i).replace(/ /g, "-") + '"></i><input type="checkbox" '+x+' class="check" title="Done!" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" aria-hidden="true" /> •<li class="todo-item"> '+ localStorage.getItem(i) +' <i class="fa fa-chevron-up" title="Move up" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-chevron-down" tile="Move down" id="' + localStorage.getItem(i) + '" aria-hidden="true"></i> <i class="fa fa-pencil" title="Delete"id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i><input class="edit" type="text" id="' + localStorage.getItem(i).replace(/ /g, "-") + '" placeholder="Whats new?" /> <i class="fa fa-check" id="' + localStorage.getItem(i).replace(/ /g, '-') + '" aria-hidden="true"></i></li><br>');
+    }
     todoItems.push(localStorage.getItem(i));
     i++;
   }
@@ -48,13 +53,15 @@ function showList() {
 /* function that adds a check box to mark off items without deletion
   after you check you can then delete
   system somebody wanted
-  NOT YET FINISHED
   */
 $('.todo-list').on('click', 'input', function() {
-  if($(".checked #" + this.id).prop('checked')) {
-    console.log("here");
+  if($('input:checkbox[id="'+this.id+'"]').is(':checked')) {
+     $("#" + this.id).prepend('<i class="fa fa-times" id="'+this.id+'"></i>');
+     localStorage.setItem(this.id, "checked");
+  } else {
+     $("#" + this.id+ ".fa-times").remove();
+     localStorage.setItem(this.id, "unchecked");
   }
-  $("#" + this.id).prepend('<i class="fa fa-times" id="'+this.id+'"></i>');
 });
 
  /* Function for deleting list items
@@ -219,6 +226,11 @@ $('.todo-list').on('click', '.fa-pencil', function() {
   $("#" + this.id + ".fa-check").css('display', 'initial');
 });
 
+/* function that saves the newly edited todo item's text
+  does this by setting a temp varaible to the edit text
+  then replacing the old todo in the array with the new text
+  runs savelist()
+  */
 $('.todo-list').on('click', '.fa-check', function() {
   var newTodo = $("#" + this.id + ".edit").val();
   var oldTodo = this.id.replace(/-/g, " ");
@@ -226,3 +238,17 @@ $('.todo-list').on('click', '.fa-check', function() {
   todoItems[oldTodoInx] = newTodo;
   saveList();
 });
+
+/*  function that checks if a todo item is checked off or not
+  does this through local storage
+  used in the showlist() function
+  */
+function checkIfChecked(name) {
+  var x = "";
+  if (localStorage.getItem(name) == "checked") {
+    x = "checked";
+    return x;
+  } else {
+    return x;
+  }
+}
