@@ -1,16 +1,17 @@
 {
-	"//1": "describes your app and its dependencies",
-	"//2": "https://docs.npmjs.com/files/package.json",
-	"//3": "updating this file will download and update your packages",
-	"name": "best-list",
-	"version": "0.0.21",
-	"description": "Todo app that goes the extra mile",
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+
+	"name": "runwus",
+	"version": "0.0.1",
+	"description": "Community running app",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js"
 	},
 	"dependencies": {
-		"express": "^5.0.0-alpha.2"
+    "express": "^4.12.4"
 	},
 	"engines": {
 		"node": "4.4.3"
